@@ -1,14 +1,22 @@
 @import "~bulma/sass/utilities/initial-variables"
+@import url('https://cdn.jsdelivr.net/npm/yakuhanjp@3.2.0/dist/css/yakuhanjp_s-noto.min.css');
 
 // Config vars
 // Kaldi logo brand color: #FD461E
-$kaldi-red: #D64000
+$kaldi-red: #e1180d
 $kaldi-red-invert: #fff
 
 $primary: $kaldi-red
 $primary-invert: $kaldi-red-invert
-$body-color: #333
+$background: $white-ter
+$body-color: #1a1a1a
+$body-font-size: 17px
+$body-line-height: 1.58
 $black: #2b2523
+$title-color: $body-color
+$content-heading-color: $body-color
+$family-primary: YakuHanJPs_Noto, Noto Sans JP,sans-serif
+$section-padding: 1rem 1rem 0
 
 .navbar .navbar-menu
   box-shadow:none !important
@@ -122,6 +130,23 @@ $menu-label-color: $white-ter
   flex-basis: 35%;
   margin: 0 1.5em 0 0;
 
+@import "~bulma"
+
+// responsiveness
++tablet-only
+  .blog-list-item .featured-thumbnail
+    flex-basis: 50%;
+
++mobile
+  .blog-list-item header
+    display: block
+  .blog-list-item .featured-thumbnail
+    text-align: center;
+    max-width: 70%;
+    margin: 0 0 1em;
+
+// Custom CSS
+
 // blog post
 .blog-post-captcha-image
   @media screen and (min-width: 1010px)
@@ -145,18 +170,8 @@ $menu-label-color: $white-ter
   max-width: 680px;
   margin: 0 auto;
 
-@import "~bulma"
-
-
-// responsiveness
-+tablet-only
-  .blog-list-item .featured-thumbnail
-    flex-basis: 50%;
-
-+mobile
-  .blog-list-item header
-    display: block
-  .blog-list-item .featured-thumbnail
-    text-align: center;
-    max-width: 70%;
-    margin: 0 0 1em;
+.blog-post-sub-title
+  color: #e1180d
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 700;

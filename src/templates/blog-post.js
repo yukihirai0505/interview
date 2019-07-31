@@ -24,8 +24,11 @@ export const BlogPostTemplate = ({
       <div className="container content">
         <div className="columns">
           <div className="column blog-post-content-wrapper">
-            <p>{subTitle}</p>
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
+            <p className="blog-post-sub-title">{subTitle}</p>
+            <h1
+              className="title is-size-2 has-text-weight-bold is-bold-light"
+              style={{ marginTop: 0 }}
+            >
               {title}
             </h1>
             <p>{date}</p>
