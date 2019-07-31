@@ -10,9 +10,10 @@ import Img from 'gatsby-image'
 export const BlogPostTemplate = ({
   content,
   contentComponent,
-  description,
+  date,
   tags,
   title,
+  subTitle,
   helmet,
 }) => {
   const PostContent = contentComponent || Content
@@ -23,10 +24,11 @@ export const BlogPostTemplate = ({
       <div className="container content">
         <div className="columns">
           <div className="column blog-post-content-wrapper">
+            <p>{subTitle}</p>
             <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
               {title}
             </h1>
-            <p>{description}</p>
+            <p>{date}</p>
             <PostContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
@@ -50,8 +52,8 @@ export const BlogPostTemplate = ({
 BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
   contentComponent: PropTypes.func,
-  description: PropTypes.string,
   title: PropTypes.string,
+  subTitle: PropTypes.string,
   helmet: PropTypes.object,
 }
 
@@ -91,7 +93,7 @@ const BlogPost = ({ data }) => {
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
-        description={post.frontmatter.description}
+        date={post.frontmatter.date}
         helmet={
           <Helmet titleTemplate="%s | Blog">
             <title>{`${post.frontmatter.title}`}</title>
@@ -103,6 +105,7 @@ const BlogPost = ({ data }) => {
         }
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
+        subTitle={post.frontmatter.subTitle}
       />
     </Layout>
   )
@@ -124,6 +127,7 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
+        subTitle
         featuredimage {
           childImageSharp {
             fluid(maxWidth: 680, maxHeight: 356, quality: 100) {
