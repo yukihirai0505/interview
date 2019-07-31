@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
-title: Making sense of the SCAA’s new Flavor Wheel
-subTitle: Sub Title
+title: これから「個人の時代」を生き抜くために
+subTitle: 「とにかく取材されたい！」というニーズを満たしたい
 date: 2016-12-17T15:04:10.000Z
 featuredpost: false
 featuredimage: /img/flavor_wheel.jpg

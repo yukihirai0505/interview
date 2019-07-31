@@ -175,3 +175,77 @@ $menu-label-color: $white-ter
   font-size: 16px;
   line-height: 1.5;
   font-weight: 700;
+
+.comment
+  margin-right: 20px
+  margin-left: 20px
+  margin-top: 32px
+
+.comment.normal
+  display: flex
+
+.comment.reverse
+  display: flex
+  flex-direction: row-reverse
+
+
+.comment img 
+  width: 50px
+  height: 50px
+  display: inline-block
+
+.comment-content
+  flex: 1
+
+.comment.normal .comment-content
+  margin-left: 12px
+
+.comment.reverse .comment-content
+  margin-right: 12px
+
+.comment-name
+  font-size: 13px
+  line-height: 1.33
+  font-weight: 700
+
+.comment.reverse .comment-name
+  text-align: right
+
+.comment-text-wrapper
+  position: relative
+  margin-top: 8px
+  padding: 20px
+  border: 1px solid #dcdcdc
+  border-radius: 2px
+
+.comment-text-wrapper:before
+  position: absolute
+  top: -1px
+  content: ""
+  border: 8px solid transparent
+  border-top-color: #dcdcdc
+
+.comment.normal .comment-text-wrapper:before
+  left: -9px
+
+.comment.reverse .comment-text-wrapper:before
+  right: -9px
+
+.comment-text-wrapper:after
+  position: absolute;
+  top: 0;
+  content: "";
+  border: 6px solid transparent;
+  border-top-color: #fff;
+
+.comment.normal .comment-text-wrapper:after
+  left: -6px;
+
+.comment.reverse .comment-text-wrapper:after
+  right: -6px;
+
+.comment-text
+  word-wrap: break-word
+  word-break: break-word
+  font-size: 17px
+  line-height: 1.58

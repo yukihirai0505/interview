@@ -6,6 +6,8 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 import Img from 'gatsby-image'
+import hirai from '../img/hirai.jpg'
+import interviewer from '../img/interviewer.png'
 
 export const BlogPostTemplate = ({
   content,
@@ -32,6 +34,56 @@ export const BlogPostTemplate = ({
               {title}
             </h1>
             <p>{date}</p>
+            <p>
+              本日は<b>「とにかく取材されたい欲」</b>
+              を満たすサービスを開発した平井さんをお呼びして、「これからの時代に必要な力」というテーマでインタビューしていきたいと思います。
+              ということでさっそくこの方に登場願いましょう。
+            </p>
+            <div className="comment normal">
+              <div>
+                <picture>
+                  <img src={hirai} alt="Yuki Hirai" />
+                </picture>
+              </div>
+              <div className="comment-content">
+                <p className="comment-name">平井氏</p>
+                <div className="comment-text-wrapper">
+                  <p className="comment-text">よろしくお願いいたします。</p>
+                </div>
+              </div>
+            </div>
+            <div className="comment reverse">
+              <div>
+                <picture>
+                  <img src={interviewer} alt="Interviewer" />
+                </picture>
+              </div>
+              <div className="comment-content">
+                <p className="comment-name">凄腕インタビュアー</p>
+                <div className="comment-text-wrapper">
+                  <p className="comment-text">
+                    よろしくお願いいたします！
+                    早速ですがなぜ今回このようなサービスを開発されたのでしょうか？
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="comment normal">
+              <div>
+                <picture>
+                  <img src={hirai} alt="Yuki Hirai" />
+                </picture>
+              </div>
+              <div className="comment-content">
+                <p className="comment-name">平井氏</p>
+                <div className="comment-text-wrapper">
+                  <p className="comment-text">
+                    誰でも一度は<b>取材を受けてみたい欲</b>
+                    ってあると思うんですよね
+                  </p>
+                </div>
+              </div>
+            </div>
             <PostContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
