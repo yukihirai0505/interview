@@ -122,6 +122,24 @@ $menu-label-color: $white-ter
   flex-basis: 35%;
   margin: 0 1.5em 0 0;
 
+// blog post
+.blog-post-captcha-image
+  @media screen and (min-width: 1010px)
+    width: 680px;
+    height: 356px;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+
+.blog-post-background-captcha-image
+  @media screen and (max-width: 1009px)
+    display: none;
+  @media screen and (min-width: 1010px)
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 356px;
+    opacity: .3;
 
 @import "~bulma"
 

@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
+import Img from 'gatsby-image'
 
 export const BlogPostTemplate = ({
   content,
@@ -54,11 +55,39 @@ BlogPostTemplate.propTypes = {
   helmet: PropTypes.object,
 }
 
+const BlogPostCaptchaImage = ({ imageInfo }) => {
+  const { alt = '', image } = imageInfo
+  return (
+    <div>
+      <div className="blog-post-background-captcha-image">
+        <Img
+          style={{ 'object-fit': 'cover', hegiht: '356px' }}
+          fluid={image.childImageSharp.fluid}
+          alt={alt}
+        />
+      </div>
+      <div className="blog-post-captcha-image">
+        <Img fluid={image.childImageSharp.fluid} alt={alt} />
+      </div>
+    </div>
+  )
+}
+
 const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data
 
   return (
     <Layout>
+      <div className="featured-thumbnail">
+        {post.frontmatter.featuredimage ? (
+          <BlogPostCaptchaImage
+            imageInfo={{
+              image: post.frontmatter.featuredimage,
+              alt: `featured image thumbnail for post ${post.title}`,
+            }}
+          />
+        ) : null}
+      </div>
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
@@ -95,6 +124,13 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
+        featuredimage {
+          childImageSharp {
+            fluid(maxWidth: 680, maxHeight: 356, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         description
         tags
       }
