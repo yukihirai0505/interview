@@ -3,7 +3,7 @@
 
 // Config vars
 // Kaldi logo brand color: #FD461E
-$kaldi-red: #e1180d
+$kaldi-red: #ffcf07
 $kaldi-red-invert: #fff
 
 $primary: $kaldi-red
@@ -171,7 +171,7 @@ $menu-label-color: $white-ter
   margin: 0 auto;
 
 .blog-post-sub-title
-  color: #e1180d
+  color: #ffcf07
   font-size: 16px;
   line-height: 1.5;
   font-weight: 700;
@@ -249,3 +249,218 @@ $menu-label-color: $white-ter
   word-break: break-word
   font-size: 17px
   line-height: 1.58
+
+.pickup
+  background: linear-gradient(180deg,#ffcf07 0,#ffcf07 288px,#fff 0,#fff)
+  @media screen and (min-width: 1010px)
+    padding-top: 20px
+
+  .pickup-content
+    @media screen and (min-width: 1010px)
+      position: relative
+      width: 990px
+      height: 296px
+      margin: 0 auto
+
+    .pickup-link
+      @media screen and (max-width: 1009px) and (min-width: 680px)
+        width: 100%;
+      @media screen and (min-width: 1010px)
+        padding-top: 0
+        position: relative
+        display: flex
+        box-shadow: 0 4px 8px -4px rgba(0,0,0,0.3)
+
+    .background
+      @media screen and (min-width: 1010px)
+        position: absolute
+        width: 100%
+        height: 100%
+        background-color: #fff
+    .pickup-image
+      position: relative
+      display: flex
+      .image
+        @media screen and (min-width: 1010px)
+          width: 560px
+          height: 294px
+          transition: opacity .3s ease-out
+
+  .pickup-title-wrapper
+    position: relative
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+    @media screen and (max-width: 679px)
+      max-height: 120px
+      padding: 16px 20px
+      background-color: #ffcf07
+    @media screen and (max-width: 1009px) and (min-width: 680px)
+      height: 120px
+      padding: 0 40px
+      background-color: #ffcf07!important
+    @media screen and (min-width: 1010px)
+      overflow: hidden;
+      flex: 1;
+      padding: 0 48px 0 40px;
+      background: #fff!important;
+
+    .title
+      @media screen and (min-width: 1010px)
+        margin-top: 12px;
+        font-size: 30px;
+        line-height: 1.23;
+
+      @media screen and (max-width: 1009px) and (min-width: 680px)
+        overflow: hidden;
+        word-wrap: break-word;
+        color: #0a0e1f;
+        font-size: 24px;
+        line-height: 1.33;
+      
+      @media screen and (max-width: 679px)
+        overflow: hidden;
+        word-wrap: break-word;
+        color: #0a0e1f;
+        font-size: 20px;
+        line-height: 1.4;
+
+    .sub-title
+      font-weight: 700;
+      @media screen and (min-width: 1010px)
+        color: #ffcf07;
+      @media screen and (max-width: 1009px)
+        display: none;
+    
+    .date
+      @media screen and (min-width: 1010px)
+        display: flex;
+        margin-top: 16px;
+        color: #767676;
+      @media screen and (max-width: 1009px) and (min-width: 680px)
+        display: flex;
+        margin-top: 8px;
+        color: #0a0e1f;
+      @media screen and (max-width: 679px)
+        display: none;
+
+.image
+  display: inline-block;
+  width: 100%;
+
+.post-container
+  @media screen and (max-width: 679px)
+    padding: 24px 20px;
+  @media screen and (max-width: 1009px) and (min-width: 680px)
+    padding: 40px 20px;
+  @media screen and (min-width: 1010px)
+    width: 990px;
+    margin: 0 auto;
+    padding: 24px 0;
+
+.post-page-title
+  display: inline-block
+  background: #ffcf07
+  font-weight: 700
+  color: #0a0e1f
+  margin-bottom: 24px
+  padding: 5px
+  
+
+.posts
+  @media screen and (max-width: 1009px) and (min-width: 680px)
+    display: flex;
+    flex-wrap: wrap;
+  @media screen and (min-width: 1010px)
+    display: flex;
+    flex-wrap: wrap;
+  .post
+    @media screen and (max-width: 679px)
+      display: flex;
+    @media screen and (max-width: 1009px) and (min-width: 680px)
+      width: 50%;
+    @media screen and (min-width: 1010px)
+      width: 314px;
+  .post+.post
+    @media screen and (max-width: 679px)
+      margin-top: 20px;
+  
+  .post:nth-child(n+3)
+    @media screen and (max-width: 1009px) and (min-width: 680px)
+      margin-top: 36px;
+  .post:nth-child(2n-1)
+    @media screen and (max-width: 1009px) and (min-width: 680px)
+      padding-right: 12px;
+  .post:nth-child(2n)
+    @media screen and (max-width: 1009px) and (min-width: 680px)
+      padding-left: 12px;
+  .post:nth-child(3n-1)
+    @media screen and (min-width: 1010px)
+      margin: 0 24px;
+  .post:nth-child(n+4)
+    @media screen and (min-width: 1010px)
+      margin-top: 36px;
+
+  .post-image
+    position: relative
+    @media screen and (max-width: 679px)
+      width: 140px;
+      height: 80px;
+    @media screen and (max-width: 1009px) and (min-width: 680px)
+      height: 180px;
+    @media screen and (min-width: 1010px)
+      width: 314px;
+      height: 164px;
+    
+    .image
+      @media screen and (max-width: 679px)
+        width: 140px;
+        height: 80px;
+      @media screen and (max-width: 1009px) and (min-width: 680px)
+        height: 180px;
+      @media screen and (min-width: 1010px)
+        width: 314px;
+        height: 164px;
+
+  .post-heading
+    overflow: hidden;
+    flex: 1;
+    @media screen and (max-width: 679px)
+      display: flex;
+      -ms-flex-flow: column;
+      flex-flow: column;
+      justify-content: center;
+      margin-left: 16px;
+    @media screen and (min-width: 680px)
+      margin-top: 12px;
+    
+    .post-heading-title
+      font-weight: 700;
+      @media screen and (max-width: 679px)
+        font-size: 13px;
+        line-height: 1.33;
+      @media screen and (min-width: 680px)
+        font-size: 16px;
+        line-height: 1.5;
+    .post-heading-date
+      display: flex;
+      color: #767676;
+      font-size: 13px;
+      line-height: 1.33;
+
+.read-more
+  display: inline-block;
+  margin-top: 24px;
+  border: 1px solid #0a0e1f;
+  padding: 14px 20px 14px;
+  min-width: 180px;
+  line-height: 1;
+  border-radius: 30px;
+  letter-spacing: 1.5;
+
+a 
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;

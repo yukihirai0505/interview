@@ -3,99 +3,48 @@ import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
+import PickUpBlogPost from '../components/PickUpBlogPost'
 import BlogRoll from '../components/BlogRoll'
 
-export const IndexPageTemplate = ({ image, title, subheading }) => (
-  <div>
-    <div
-      className="full-width-image margin-top-0"
-      style={{
-        backgroundImage: `url(${
-          !!image.childImageSharp ? image.childImageSharp.fluid.src : image
-        })`,
-        backgroundPosition: `top left`,
-        backgroundAttachment: `fixed`,
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          height: '150px',
-          lineHeight: '1',
-          justifyContent: 'space-around',
-          alignItems: 'left',
-          flexDirection: 'column',
-        }}
-      >
-        <h1
-          className="has-text-weight-bold is-size-3-mobile is-size-2-tablet is-size-1-widescreen"
-          style={{
-            boxShadow:
-              'rgb(255, 68, 0) 0.5rem 0px 0px, rgb(255, 68, 0) -0.5rem 0px 0px',
-            backgroundColor: 'rgb(255, 68, 0)',
-            color: 'white',
-            lineHeight: '1',
-            padding: '0.25em',
-          }}
-        >
-          {title}
-        </h1>
-        <h3
-          className="has-text-weight-bold is-size-5-mobile is-size-5-tablet is-size-4-widescreen"
-          style={{
-            boxShadow:
-              'rgb(255, 68, 0) 0.5rem 0px 0px, rgb(255, 68, 0) -0.5rem 0px 0px',
-            backgroundColor: 'rgb(255, 68, 0)',
-            color: 'white',
-            lineHeight: '1',
-            padding: '0.25em',
-          }}
-        >
-          {subheading}
-        </h3>
-      </div>
-    </div>
-    <section className="section section--gradient">
-      <div className="container">
-        <div className="section">
-          <div className="columns">
-            <div className="column is-10 is-offset-1">
-              <div className="content">
-                <div className="column is-12">
-                  <h3 className="has-text-weight-semibold is-size-2">
-                    新着記事
-                  </h3>
-                  <BlogRoll />
-                  <div className="column is-12 has-text-centered">
-                    <Link className="btn" to="/blog">
-                      Read more
-                    </Link>
-                  </div>
-                </div>
-              </div>
+export const IndexPageTemplate = ({ image, title, subheading, posts }) => {
+  const post = posts[0]
+  return (
+    <div>
+      <PickUpBlogPost post={post} />
+      <section className="section">
+        <div className="post-container">
+          <div>
+            <h3 className="post-page-title">新着取材</h3>
+          </div>
+          <BlogRoll posts={posts.slice(0)} />
+          <div className="has-text-centered">
+            <div className="read-more">
+              <Link to="/blog">他の取材もみる</Link>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
-)
+      </section>
+    </div>
+  )
+}
 
 IndexPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   title: PropTypes.string,
   subheading: PropTypes.string,
+  posts: PropTypes.array,
 }
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
-
+  const { edges } = data.allMarkdownRemark
   return (
     <Layout>
       <IndexPageTemplate
         image={frontmatter.image}
         title={frontmatter.title}
         subheading={frontmatter.subheading}
+        posts={edges}
       />
     </Layout>
   )
@@ -124,6 +73,35 @@ export const pageQuery = graphql`
           }
         }
         subheading
+      }
+    }
+    allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date] }
+      filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+      limit: 20
+    ) {
+      edges {
+        node {
+          excerpt(pruneLength: 400)
+          id
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            templateKey
+            date(formatString: "MMMM DD, YYYY")
+            featuredpost
+            featuredimage {
+              childImageSharp {
+                fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
+                  src
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
