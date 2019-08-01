@@ -26,13 +26,17 @@ export const BlogPostTemplate = ({
       <div className="container content">
         <div className="columns">
           <div className="column blog-post-content-wrapper">
-            <p className="blog-post-sub-title">{subTitle}</p>
+            <span className="blog-post-sub-title">{subTitle}</span>
             <h1
               className="title is-size-2 has-text-weight-bold is-bold-light"
-              style={{ marginTop: 0 }}
+              style={{ marginTop: 12 }}
             >
               {title}
             </h1>
+            <div style={{ marginBottom: '1.2em' }}>
+              <span className="pr-icon">#ステマ！</span>{' '}
+              <span className="pr-icon">#PR</span>
+            </div>
             <p>{date}</p>
             <p>
               本日は<b>「とにかく取材されたい欲」</b>
