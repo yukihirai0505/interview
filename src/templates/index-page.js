@@ -69,8 +69,7 @@ export const pageQuery = graphql`
             title
             templateKey
             date(formatString: "MMMM DD, YYYY")
-            featuredpost
-            featuredimage {
+            captchaImage {
               childImageSharp {
                 fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
                   src

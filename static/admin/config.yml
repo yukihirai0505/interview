@@ -18,14 +18,18 @@ collections:
           widget: 'hidden',
           default: 'blog-post',
         }
+      - {
+          label: 'Self Introduction',
+          name: 'selfIntroduction',
+          widget: 'string',
+        }
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Sub Title', name: 'subTitle', widget: 'string' }
+      - { label: 'Captcha Image', name: 'captchaImage', widget: image }
+      - { label: 'Contents', name: 'contents', widget: 'list' }
+      - { label: 'Nickname', name: 'nickname', widget: 'string' }
+      - { label: 'Icon', name: 'icon', widget: image }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-      - { label: 'Description', name: 'description', widget: 'text' }
-      - { label: 'Featured Post', name: 'featuredpost', widget: 'boolean' }
-      - { label: 'Featured Image', name: 'featuredimage', widget: image }
-      - { label: 'Body', name: 'body', widget: 'markdown' }
-      - { label: 'Tags', name: 'tags', widget: 'list' }
 
   - name: 'pages'
     label: 'Pages'

@@ -13,7 +13,6 @@ export const BlogPostTemplate = ({
   content,
   contentComponent,
   date,
-  tags,
   title,
   subTitle,
   helmet,
@@ -89,18 +88,6 @@ export const BlogPostTemplate = ({
               </div>
             </div>
             <PostContent content={content} />
-            {tags && tags.length ? (
-              <div style={{ marginTop: `4rem` }}>
-                <h4>Tags</h4>
-                <ul className="taglist">
-                  {tags.map(tag => (
-                    <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
           </div>
         </div>
       </div>
@@ -116,7 +103,7 @@ BlogPostTemplate.propTypes = {
   helmet: PropTypes.object,
 }
 
-const BlogPostCaptchaImage = ({ imageInfo }) => {
+const BlogPostcaptchaImage = ({ imageInfo }) => {
   const { alt = '', image } = imageInfo
   return (
     <div>
@@ -140,10 +127,10 @@ const BlogPost = ({ data }) => {
   return (
     <Layout>
       <div className="featured-thumbnail">
-        {post.frontmatter.featuredimage ? (
-          <BlogPostCaptchaImage
+        {post.frontmatter.captchaImage ? (
+          <BlogPostcaptchaImage
             imageInfo={{
-              image: post.frontmatter.featuredimage,
+              image: post.frontmatter.captchaImage,
               alt: `featured image thumbnail for post ${post.title}`,
             }}
           />
@@ -158,10 +145,9 @@ const BlogPost = ({ data }) => {
             title={post.frontmatter.title}
             description={post.frontmatter.description}
             url={`https://pr.yabaiwebyasan.com/blog/${post.id}`}
-            imageUrl={`https://pr.yabaiwebyasan.com${post.frontmatter.featuredimage.childImageSharp.fluid.src}`}
+            imageUrl={`https://pr.yabaiwebyasan.com${post.frontmatter.captchaImage.childImageSharp.fluid.src}`}
           />
         }
-        tags={post.frontmatter.tags}
         title={post.frontmatter.title}
         subTitle={post.frontmatter.subTitle}
       />
@@ -186,7 +172,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         subTitle
-        featuredimage {
+        captchaImage {
           childImageSharp {
             fluid(maxWidth: 680, maxHeight: 356, quality: 100) {
               src
@@ -194,8 +180,6 @@ export const pageQuery = graphql`
             }
           }
         }
-        description
-        tags
       }
     }
   }

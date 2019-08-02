@@ -13,7 +13,7 @@ class BlogRoll extends React.Component {
             <Link className="post" to={post.fields.slug} key={post.id}>
               <div className="post-image">
                 <img
-                  src={post.frontmatter.featuredimage.childImageSharp.fluid.src}
+                  src={post.frontmatter.captchaImage.childImageSharp.fluid.src}
                   alt={post.frontmatter.description}
                   className="image"
                   style={{ objectFit: 'cover' }}

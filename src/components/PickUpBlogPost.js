@@ -14,7 +14,7 @@ class PickUpBlogPost extends React.Component {
             <div className="background"></div>
             <div className="pickup-image">
               <img
-                src={post.frontmatter.featuredimage.childImageSharp.fluid.src}
+                src={post.frontmatter.captchaImage.childImageSharp.fluid.src}
                 alt={post.frontmatter.description}
                 className="image"
                 style={{ objectFit: 'cover' }}
