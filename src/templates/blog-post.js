@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { kebabCase } from 'lodash'
-import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 import Img from 'gatsby-image'
 import hirai from '../img/hirai.jpg'
 import interviewer from '../img/interviewer.png'
+import { OGP } from '../components/OpenGraphProtocol'
 
 export const BlogPostTemplate = ({
   content,
@@ -154,13 +154,12 @@ const BlogPost = ({ data }) => {
         contentComponent={HTMLContent}
         date={post.frontmatter.date}
         helmet={
-          <Helmet titleTemplate="%s | Blog">
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta
-              name="description"
-              content={`${post.frontmatter.description}`}
-            />
-          </Helmet>
+          <OGP
+            title={post.frontmatter.title}
+            description={post.frontmatter.description}
+            url={`https://pr.yabaiwebyasan.com/blog/${post.id}`}
+            imageUrl={`https://pr.yabaiwebyasan.com${post.frontmatter.featuredimage.childImageSharp.fluid.src}`}
+          />
         }
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
@@ -190,6 +189,7 @@ export const pageQuery = graphql`
         featuredimage {
           childImageSharp {
             fluid(maxWidth: 680, maxHeight: 356, quality: 100) {
+              src
               ...GatsbyImageSharpFluid
             }
           }

@@ -2,7 +2,7 @@ var proxy = require('http-proxy-middleware')
 
 module.exports = {
   siteMetadata: {
-    title: 'ステマ！',
+    title: 'ステマ！β版',
     description:
       '「取材されたい欲」を満たすための自己承認欲求に塗れたWEBメディア',
   },
