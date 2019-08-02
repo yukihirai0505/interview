@@ -16,7 +16,7 @@ export const IndexPageTemplate = ({ posts }) => {
           <div>
             <h3 className="post-page-title">新着取材</h3>
           </div>
-          <BlogRoll posts={posts.slice(0)} />
+          <BlogRoll posts={posts.slice(1)} />
           <div className="has-text-centered">
             <div className="read-more">
               <Link to="/blog">他の取材もみる</Link>
@@ -67,6 +67,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            subTitle
             templateKey
             date(formatString: "MMMM DD, YYYY")
             captchaImage {

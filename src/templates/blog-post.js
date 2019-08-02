@@ -1,24 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { kebabCase } from 'lodash'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
 import Img from 'gatsby-image'
-import hirai from '../img/hirai.jpg'
-import interviewer from '../img/interviewer.png'
 import { OGP } from '../components/OpenGraphProtocol'
 
 export const BlogPostTemplate = ({
-  content,
-  contentComponent,
+  helmet,
   date,
   title,
   subTitle,
-  helmet,
+  templateType,
+  serviceName,
+  nickname,
+  icon,
+  contents,
 }) => {
-  const PostContent = contentComponent || Content
-
   return (
     <section className="section">
       {helmet || ''}
@@ -38,18 +35,19 @@ export const BlogPostTemplate = ({
             </div>
             <p>{date}</p>
             <p>
-              本日は<b>「とにかく取材されたい欲」</b>
-              を満たすサービスを開発した平井さんをお呼びして、「これからの時代に必要な力」というテーマでインタビューしていきたいと思います。
+              本日はいま話題沸騰中のサービス<b>「{serviceName}」</b>
+              を開発した<b>{nickname}</b>さん
+              をお呼びしてインタビューしていきたいと思います。
               ということでさっそくこの方に登場願いましょう。
             </p>
             <div className="comment normal">
               <div>
                 <picture>
-                  <img src={hirai} alt="Yuki Hirai" />
+                  <img src={icon} alt={nickname} />
                 </picture>
               </div>
               <div className="comment-content">
-                <p className="comment-name">平井氏</p>
+                <p className="comment-name">{nickname}</p>
                 <div className="comment-text-wrapper">
                   <p className="comment-text">よろしくお願いいたします。</p>
                 </div>
@@ -58,7 +56,7 @@ export const BlogPostTemplate = ({
             <div className="comment reverse">
               <div>
                 <picture>
-                  <img src={interviewer} alt="Interviewer" />
+                  <img src="/img/interviewer.png" alt="Interviewer" />
                 </picture>
               </div>
               <div className="comment-content">
@@ -74,7 +72,7 @@ export const BlogPostTemplate = ({
             <div className="comment normal">
               <div>
                 <picture>
-                  <img src={hirai} alt="Yuki Hirai" />
+                  <img src={icon} alt={nickname} />
                 </picture>
               </div>
               <div className="comment-content">
@@ -87,7 +85,6 @@ export const BlogPostTemplate = ({
                 </div>
               </div>
             </div>
-            <PostContent content={content} />
           </div>
         </div>
       </div>
@@ -96,14 +93,17 @@ export const BlogPostTemplate = ({
 }
 
 BlogPostTemplate.propTypes = {
-  content: PropTypes.node.isRequired,
-  contentComponent: PropTypes.func,
   title: PropTypes.string,
   subTitle: PropTypes.string,
   helmet: PropTypes.object,
+  templateType: PropTypes.string,
+  serviceName: PropTypes.string,
+  nickname: PropTypes.string,
+  icon: PropTypes.string,
+  contents: PropTypes.array,
 }
 
-const BlogPostcaptchaImage = ({ imageInfo }) => {
+const BlogPostCaptchaImage = ({ imageInfo }) => {
   const { alt = '', image } = imageInfo
   return (
     <div>
@@ -128,7 +128,7 @@ const BlogPost = ({ data }) => {
     <Layout>
       <div className="featured-thumbnail">
         {post.frontmatter.captchaImage ? (
-          <BlogPostcaptchaImage
+          <BlogPostCaptchaImage
             imageInfo={{
               image: post.frontmatter.captchaImage,
               alt: `featured image thumbnail for post ${post.title}`,
@@ -137,9 +137,6 @@ const BlogPost = ({ data }) => {
         ) : null}
       </div>
       <BlogPostTemplate
-        content={post.html}
-        contentComponent={HTMLContent}
-        date={post.frontmatter.date}
         helmet={
           <OGP
             title={post.frontmatter.title}
@@ -148,8 +145,14 @@ const BlogPost = ({ data }) => {
             imageUrl={`https://pr.yabaiwebyasan.com${post.frontmatter.captchaImage.childImageSharp.fluid.src}`}
           />
         }
+        date={post.frontmatter.date}
         title={post.frontmatter.title}
         subTitle={post.frontmatter.subTitle}
+        templateType={post.frontmatter.templateType}
+        serviceName={post.frontmatter.serviceName}
+        nickname={post.frontmatter.nickname}
+        icon={post.frontmatter.iconImage.childImageSharp.fluid.src}
+        contents={post.frontmatter.contents}
       />
     </Layout>
   )
@@ -169,12 +172,28 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
         title
         subTitle
+        templateKey
+        date(formatString: "MMMM DD, YYYY")
         captchaImage {
           childImageSharp {
-            fluid(maxWidth: 680, maxHeight: 356, quality: 100) {
+            fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
+              src
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        templateType
+        serviceName
+        contents {
+          question
+          answer
+        }
+        nickname
+        iconImage {
+          childImageSharp {
+            fluid(maxWidth: 300, maxHeight: 300, quality: 100) {
               src
               ...GatsbyImageSharpFluid
             }

@@ -1,9 +1,9 @@
 ---
 templateKey: blog-post
 selfIntroduction: Yuki Hiraiですっっ！
-title: テストがしたいです
-subTitle: 私はテストがしたい
-captchaImage: /img/flavor_wheel.jpg
+title: 私はテストがしたかった
+subTitle: うおー
+captchaImage: /img/hirai_test_captcha.png
 templateType: individual-developer
 serviceName: ステマ！
 contents:
@@ -24,6 +24,6 @@ contents:
     imagePath:
     imageDescription:
 nickname: 平井氏
-icon: /img/hirai.jpg
+iconImage: /img/hirai.jpg
 date: 2017-01-04T15:04:10.000Z
 ---

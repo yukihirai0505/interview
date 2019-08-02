@@ -52,6 +52,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            subTitle
             templateKey
             date(formatString: "MMMM DD, YYYY")
             captchaImage {
