@@ -6,7 +6,6 @@ class BlogRoll extends React.Component {
   render() {
     const { data } = this.props
     const { posts } = data
-    console.info(posts)
     return (
       <div className="posts">
         {posts &&
