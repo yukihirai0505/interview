@@ -84,7 +84,7 @@ const CommonContent = ({ intro, nickname, icon, contents }) => {
         icon={icon}
         isNormal={true}
       />
-      <p style={{ marginTop: '20px', marginBottom: '20px' }}>
+      <p style={{ marginTop: '20px' }}>
         {nickname}
         さんのお話はとてもユニークで面白かったですね！
         <br />

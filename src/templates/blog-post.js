@@ -8,10 +8,18 @@ import {
   NormalContent,
   IndividualDeveloperContent,
 } from '../components/BlogContent'
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from 'react-share'
+import { globalHistory } from '@reach/router'
 
 export const BlogPostTemplate = ({
   helmet,
   date,
+  url,
   title,
   subTitle,
   templateType,
@@ -52,6 +60,27 @@ export const BlogPostTemplate = ({
                 contents={contents}
               />
             ) : null}
+            <div style={{ padding: '36px 20px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <FacebookShareButton url={url}>
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+                <TwitterShareButton
+                  title={title}
+                  via="@plzprme"
+                  url={url}
+                  style={{ marginLeft: '8px' }}
+                >
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -60,6 +89,7 @@ export const BlogPostTemplate = ({
 }
 
 BlogPostTemplate.propTypes = {
+  url: PropTypes.string,
   title: PropTypes.string,
   subTitle: PropTypes.string,
   helmet: PropTypes.object,
@@ -90,6 +120,8 @@ const BlogPostCaptchaImage = ({ imageInfo }) => {
 
 const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data
+  const articleTitle = post.frontmatter.title
+  const articleUrl = `https://pr.yabaiwebyasan.com${globalHistory.location.pathname}`
 
   return (
     <Layout>
@@ -106,14 +138,15 @@ const BlogPost = ({ data }) => {
       <BlogPostTemplate
         helmet={
           <OGP
-            title={post.frontmatter.title}
+            title={articleTitle}
             description={post.frontmatter.description}
-            url={`https://pr.yabaiwebyasan.com/blog/${post.id}`}
+            url={articleUrl}
             imageUrl={`https://pr.yabaiwebyasan.com${post.frontmatter.captchaImage.childImageSharp.fluid.src}`}
           />
         }
         date={post.frontmatter.date}
-        title={post.frontmatter.title}
+        url={articleTitle}
+        title={articleTitle}
         subTitle={post.frontmatter.subTitle}
         templateType={post.frontmatter.templateType}
         serviceName={post.frontmatter.serviceName}
