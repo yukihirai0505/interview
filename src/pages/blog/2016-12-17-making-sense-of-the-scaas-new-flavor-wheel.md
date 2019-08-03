@@ -19,5 +19,6 @@ contents:
     answer: もっと開発頑張ります
 nickname: 平井氏
 iconImage: /img/hirai.jpg
+twitterAccountName: plzprme
 date: 2017-01-04T15:04:10.000Z
 ---

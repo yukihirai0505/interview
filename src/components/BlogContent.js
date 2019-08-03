@@ -89,7 +89,8 @@ const CommonContent = ({ intro, nickname, icon, contents }) => {
         さんのお話はとてもユニークで面白かったですね！
         <br />
         <br />
-        いまこの記事を読んでいる<b>あなたも次は取材を受ける側</b>
+        いまこの記事を読んでいる
+        <b className="text-yellow-line">あなたも次は取材を受ける側</b>
         になってみませんか？
         <br />
         <br />
@@ -116,7 +117,8 @@ export const NormalContent = ({ nickname, icon, contents }) => {
     <CommonContent
       intro={
         <p>
-          本日はいま日本中が熱狂して止まないこのお方！<b>{nickname}</b>
+          本日はいま<b className="text-yellow-line">日本中が熱狂して止まない</b>
+          このお方！<b>{nickname}</b>
           さんをお呼びしてインタビューしていきたいと思います。
           ということでさっそくこの方に登場願いましょう。
         </p>
@@ -144,7 +146,8 @@ export const IndividualDeveloperContent = ({
     <CommonContent
       intro={
         <p>
-          本日はいま話題沸騰中のサービス<b>「{serviceName}」</b>
+          本日はいま話題沸騰中のサービス
+          <b className="text-yellow-line">「{serviceName}」</b>
           を開発した<b>{nickname}</b>
           さんをお呼びしてインタビューしていきたいと思います。
           ということでさっそくこの方に登場願いましょう。

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Img from 'gatsby-image'
 import { OGP } from '../components/OpenGraphProtocol'
@@ -26,6 +26,7 @@ export const BlogPostTemplate = ({
   serviceName,
   nickname,
   icon,
+  twitterAccountName,
   contents,
 }) => {
   return (
@@ -34,7 +35,9 @@ export const BlogPostTemplate = ({
       <div className="container content">
         <div className="columns">
           <div className="column blog-post-content-wrapper">
-            <span className="blog-post-sub-title">{subTitle}</span>
+            <span className="blog-post-sub-title text-yellow-line">
+              {subTitle}
+            </span>
             <h1
               className="title is-size-2 has-text-weight-bold is-bold-light"
               style={{ marginTop: 12 }}
@@ -46,6 +49,16 @@ export const BlogPostTemplate = ({
               <span className="pr-icon">#PR</span>
             </div>
             <p>{date}</p>
+            <p style={{ fontWeight: 700 }}>
+              取材協力:{' '}
+              {twitterAccountName ? (
+                <Link to={`https://twitter.com/${twitterAccountName}`}>
+                  {nickname}さん(@{twitterAccountName})
+                </Link>
+              ) : (
+                `${nickname}さん`
+              )}
+            </p>
             {templateType === 'normal' ? (
               <NormalContent
                 nickname={nickname}
@@ -152,6 +165,7 @@ const BlogPost = ({ data }) => {
         serviceName={post.frontmatter.serviceName}
         nickname={post.frontmatter.nickname}
         icon={post.frontmatter.iconImage.childImageSharp.fluid.src}
+        twitterAccountName={post.frontmatter.twitterAccountName}
         contents={post.frontmatter.contents}
       />
     </Layout>
@@ -208,6 +222,7 @@ export const pageQuery = graphql`
             }
           }
         }
+        twitterAccountName
       }
     }
   }
