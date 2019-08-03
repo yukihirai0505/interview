@@ -4,6 +4,10 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Img from 'gatsby-image'
 import { OGP } from '../components/OpenGraphProtocol'
+import {
+  NormalContent,
+  IndividualDeveloperContent,
+} from '../components/BlogContent'
 
 export const BlogPostTemplate = ({
   helmet,
@@ -34,57 +38,20 @@ export const BlogPostTemplate = ({
               <span className="pr-icon">#PR</span>
             </div>
             <p>{date}</p>
-            <p>
-              本日はいま話題沸騰中のサービス<b>「{serviceName}」</b>
-              を開発した<b>{nickname}</b>さん
-              をお呼びしてインタビューしていきたいと思います。
-              ということでさっそくこの方に登場願いましょう。
-            </p>
-            <div className="comment normal">
-              <div>
-                <picture>
-                  <img src={icon} alt={nickname} />
-                </picture>
-              </div>
-              <div className="comment-content">
-                <p className="comment-name">{nickname}</p>
-                <div className="comment-text-wrapper">
-                  <p className="comment-text">よろしくお願いいたします。</p>
-                </div>
-              </div>
-            </div>
-            <div className="comment reverse">
-              <div>
-                <picture>
-                  <img src="/img/interviewer.png" alt="Interviewer" />
-                </picture>
-              </div>
-              <div className="comment-content">
-                <p className="comment-name">凄腕インタビュアー</p>
-                <div className="comment-text-wrapper">
-                  <p className="comment-text">
-                    よろしくお願いいたします！
-                    早速ですがなぜ今回このようなサービスを開発されたのでしょうか？
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="comment normal">
-              <div>
-                <picture>
-                  <img src={icon} alt={nickname} />
-                </picture>
-              </div>
-              <div className="comment-content">
-                <p className="comment-name">平井氏</p>
-                <div className="comment-text-wrapper">
-                  <p className="comment-text">
-                    誰でも一度は<b>取材を受けてみたい欲</b>
-                    ってあると思うんですよね
-                  </p>
-                </div>
-              </div>
-            </div>
+            {templateType === 'normal' ? (
+              <NormalContent
+                nickname={nickname}
+                icon={icon}
+                contents={contents}
+              />
+            ) : templateType === 'individual-developer' ? (
+              <IndividualDeveloperContent
+                serviceName={serviceName}
+                nickname={nickname}
+                icon={icon}
+                contents={contents}
+              />
+            ) : null}
           </div>
         </div>
       </div>
@@ -189,6 +156,15 @@ export const pageQuery = graphql`
         contents {
           question
           answer
+          imagePath {
+            childImageSharp {
+              fluid(maxWidth: 300, maxHeight: 300, quality: 100) {
+                src
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+          imageDescription
         }
         nickname
         iconImage {
