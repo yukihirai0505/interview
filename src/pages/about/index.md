@@ -4,22 +4,36 @@ path: /about
 title: ステマ！について
 ---
 
-### Shade-grown coffee
+## コンセプト
 
-Coffee is a small tree or shrub that grows in the forest understory in its wild form, and traditionally was grown commercially under other trees that provided shade. The forest-like structure of shade coffee farms provides habitat for a great number of migratory and resident species.
+<b>人生で一度はネット記事で取材されたい</b>
 
-### Single origin
+こう思ったことはありませんか？
 
-Single-origin coffee is coffee grown within a single known geographic origin. Sometimes, this is a single farm or a specific collection of beans from a single country. The name of the coffee is then usually the place it was grown to whatever degree available.
+私はあります
 
-### Sustainable farming
+ですが、世の中の記者達ははっきり言って見る目がありません。
 
-Sustainable agriculture is farming in sustainable ways based on an understanding of ecosystem services, the study of relationships between organisms and their environment. What grows where and how it is grown are a matter of choice and careful consideration for nature and communities.
+なぜなら、この私が未だかつて一度も取材を受けたことがないからです。
 
-### Direct sourcing
+そこで、思いました
 
-Direct trade is a form of sourcing practiced by some coffee roasters. Advocates of direct trade practices promote direct communication and price negotiation between buyer and farmer, along with systems that encourage and incentivize quality.
+<b>もはや自作自演でいいじゃん</b>
 
-### Reinvest profits
+<b>とりあえず取材記事っぽいの自分で作っちゃえばいいじゃん</b>
 
-We want to truly empower the communities that bring amazing coffee to you. That’s why we reinvest 20% of our profits into farms, local businesses and schools everywhere our coffee is grown. You can see the communities grow and learn more about coffee farming on our blog.
+とね。
+
+その結果生まれたのがこのサービス
+
+<b>「ステマ！」</b>
+
+です。
+
+名前は完全にアウトですが、
+
+一応各記事には PR 表記と念の為ステマ表記も入れてあるので
+
+まぁ、大丈夫だと思います。
+
+アウトそうならこっそりと教えてください。。。
