@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Img from 'gatsby-image'
 
 const Comment = ({
   comment,
@@ -32,7 +33,6 @@ Comment.propTypes = {
 }
 
 const CommonContent = ({ intro, nickname, icon, contents }) => {
-  console.info(contents)
   return (
     <div>
       {intro}
@@ -55,10 +55,51 @@ const CommonContent = ({ intro, nickname, icon, contents }) => {
               icon={icon}
               isNormal={true}
             />
-            {imagePath ? <div>{imageDescription}</div> : null}
+            {imagePath ? (
+              <div className="image-item">
+                <figure>
+                  <div className="image">
+                    <Img
+                      fluid={imagePath.childImageSharp.fluid}
+                      alt={imageDescription}
+                    />
+                  </div>
+                  <div className="image-description">
+                    <figcaption>
+                      <p>{imageDescription}</p>
+                    </figcaption>
+                  </div>
+                </figure>
+              </div>
+            ) : null}
           </div>
         )
       })}
+      <Comment
+        comment={`${nickname}さん！本日はお忙しい中取材のお時間ありがとうございました！ぜひ、また取材させてくださいね！`}
+      />
+      <Comment
+        comment={`いえ！こちらこそ楽しかったです！ありがとうございました！`}
+        nickname={nickname}
+        icon={icon}
+        isNormal={true}
+      />
+      <p style={{ marginTop: '20px', marginBottom: '20px' }}>
+        {nickname}
+        さんのお話はとてもユニークで面白かったですね！
+        <br />
+        <br />
+        いまこの記事を読んでいる<b>あなたも次は取材を受ける側</b>
+        になってみませんか？
+        <br />
+        <br />
+        こちらのサイトでは随時、取材を受け付けております！
+        <br />
+        興味のある方はいつでもお問い合わせください！
+        <br />
+        <br />
+        最後までお読みいただきましてありがとうございました！
+      </p>
     </div>
   )
 }
