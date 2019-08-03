@@ -277,6 +277,9 @@ $menu-label-color: $white-ter
         position: relative
         display: flex
         box-shadow: 0 4px 8px -4px rgba(0,0,0,0.3)
+    .pickup-link:hover
+      @media screen and (min-width: 1010px)
+        opacity: 1;
 
     .background
       @media screen and (min-width: 1010px)
@@ -291,6 +294,9 @@ $menu-label-color: $white-ter
           width: 560px
           height: 294px
           transition: opacity .3s ease-out
+    .pickup-link:hover .pickup-image
+      @media screen and (min-width: 1010px)
+        opacity: .6;
 
   .pickup-title-wrapper
     position: relative
@@ -311,7 +317,6 @@ $menu-label-color: $white-ter
       flex: 1;
       padding: 0 48px 0 40px;
       background: #fff!important;
-
     .title
       @media screen and (min-width: 1010px)
         margin-top: 12px;
@@ -350,6 +355,10 @@ $menu-label-color: $white-ter
         color: #0a0e1f;
       @media screen and (max-width: 679px)
         display: none;
+
+.pickup-link:hover .pickup-title-wrapper
+  @media screen and (min-width: 1010px)
+    opacity: .6;
 
 .image
   display: inline-block;
@@ -470,3 +479,7 @@ a
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+
+a:hover, button:hover
+  @media screen and (min-width: 1010px)
+    opacity: .6;
