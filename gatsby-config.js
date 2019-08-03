@@ -2,6 +2,7 @@ var proxy = require('http-proxy-middleware')
 
 module.exports = {
   siteMetadata: {
+    siteUrl: 'https://pr.yabaiwebyasan.com/',
     title: 'ステマ！β版',
     description:
       '「取材されたい欲」を満たすための自己承認欲求に塗れたWEBメディア',
@@ -75,6 +76,7 @@ module.exports = {
       },
     }, // must be after other CSS plugins
     'gatsby-plugin-netlify', // make sure to keep it last in the array
+    `gatsby-plugin-sitemap`,
   ],
   // for avoiding CORS while developing Netlify Functions locally
   // read more: https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying
