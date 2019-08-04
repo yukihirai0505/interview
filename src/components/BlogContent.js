@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Img from 'gatsby-image'
+import { Fragment } from 'react'
+import { Link } from 'gatsby'
 
 const Comment = ({
   comment,
@@ -18,7 +20,16 @@ const Comment = ({
       <div className="comment-content">
         <p className="comment-name">{nickname}</p>
         <div className="comment-text-wrapper">
-          <p className="comment-text">{comment}</p>
+          <p className="comment-text">
+            {comment.split('\\n').map(item => {
+              return (
+                <Fragment>
+                  {item}
+                  <br />
+                </Fragment>
+              )
+            })}
+          </p>
         </div>
       </div>
     </div>
@@ -32,7 +43,13 @@ Comment.propTypes = {
   isNormal: PropTypes.bool,
 }
 
-const CommonContent = ({ intro, nickname, icon, contents }) => {
+const CommonContent = ({
+  intro,
+  selfIntroduction,
+  nickname,
+  icon,
+  contents,
+}) => {
   return (
     <div>
       {intro}
@@ -45,6 +62,20 @@ const CommonContent = ({ intro, nickname, icon, contents }) => {
       <Comment
         comment={`本日は貴重なお時間ありがとうございます！どうぞよろしくお願いいたします！`}
       />
+      {selfIntroduction && (
+        <div>
+          <Comment
+            comment={`それではまず簡単な自己紹介からお願いできますでしょうか？`}
+          />
+          <Comment
+            comment={selfIntroduction}
+            nickname={nickname}
+            icon={icon}
+            isNormal={true}
+          />
+          <Comment comment={`なるほどー！ありがとうございます！`} />
+        </div>
+      )}
       {contents.map(({ question, answer, imagePath, imageDescription }) => {
         return (
           <div>
@@ -98,6 +129,11 @@ const CommonContent = ({ intro, nickname, icon, contents }) => {
         <br />
         興味のある方はいつでもお問い合わせください！
         <br />
+        こちらのフォームから簡単に取材記事を投稿することができます。
+        <br />
+        <br />
+        <a href={'https://forms.gle/twhjDuw32mEJZwz77'}>→【Googleフォーム】</a>
+        <br />
         <br />
         最後までお読みいただきましてありがとうございました！
       </p>
@@ -112,7 +148,12 @@ CommonContent.propTypes = {
   contents: PropTypes.array,
 }
 
-export const NormalContent = ({ nickname, icon, contents }) => {
+export const NormalContent = ({
+  selfIntroduction,
+  nickname,
+  icon,
+  contents,
+}) => {
   return (
     <CommonContent
       intro={
@@ -123,6 +164,7 @@ export const NormalContent = ({ nickname, icon, contents }) => {
           ということでさっそくこの方に登場願いましょう。
         </p>
       }
+      selfIntroduction={selfIntroduction}
       nickname={nickname}
       icon={icon}
       contents={contents}
@@ -138,6 +180,7 @@ NormalContent.propTypes = {
 
 export const IndividualDeveloperContent = ({
   serviceName,
+  selfIntroduction,
   nickname,
   icon,
   contents,
@@ -153,6 +196,7 @@ export const IndividualDeveloperContent = ({
           ということでさっそくこの方に登場願いましょう。
         </p>
       }
+      selfIntroduction={selfIntroduction}
       nickname={nickname}
       icon={icon}
       contents={contents}

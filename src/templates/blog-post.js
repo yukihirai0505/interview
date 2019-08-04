@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Img from 'gatsby-image'
 import { OGP } from '../components/OpenGraphProtocol'
@@ -22,6 +22,7 @@ export const BlogPostTemplate = ({
   url,
   title,
   subTitle,
+  selfIntroduction,
   templateType,
   serviceName,
   nickname,
@@ -52,15 +53,16 @@ export const BlogPostTemplate = ({
             <p style={{ fontWeight: 700 }}>
               取材協力:{' '}
               {twitterAccountName ? (
-                <Link to={`https://twitter.com/${twitterAccountName}`}>
+                <a to={`https://twitter.com/${twitterAccountName}`}>
                   {nickname}さん(@{twitterAccountName})
-                </Link>
+                </a>
               ) : (
                 `${nickname}さん`
               )}
             </p>
             {templateType === 'normal' ? (
               <NormalContent
+                selfIntroduction={selfIntroduction}
                 nickname={nickname}
                 icon={icon}
                 contents={contents}
@@ -68,6 +70,7 @@ export const BlogPostTemplate = ({
             ) : templateType === 'individual-developer' ? (
               <IndividualDeveloperContent
                 serviceName={serviceName}
+                selfIntroduction={selfIntroduction}
                 nickname={nickname}
                 icon={icon}
                 contents={contents}
@@ -105,6 +108,7 @@ BlogPostTemplate.propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
   subTitle: PropTypes.string,
+  selfIntroduction: PropTypes.string,
   helmet: PropTypes.object,
   templateType: PropTypes.string,
   serviceName: PropTypes.string,
@@ -161,6 +165,7 @@ const BlogPost = ({ data }) => {
         url={articleTitle}
         title={articleTitle}
         subTitle={post.frontmatter.subTitle}
+        selfIntroduction={post.frontmatter.selfIntroduction}
         templateType={post.frontmatter.templateType}
         serviceName={post.frontmatter.serviceName}
         nickname={post.frontmatter.nickname}
@@ -188,6 +193,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         subTitle
+        selfIntroduction
         templateKey
         date(formatString: "MMMM DD, YYYY")
         captchaImage {

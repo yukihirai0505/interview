@@ -1,6 +1,5 @@
 ---
 templateKey: blog-post
-selfIntroduction: Yuki Hiraiですっっ！
 title: 私はテストがしたかった
 subTitle: うおー
 captchaImage: /img/hirai_test_captcha.png
