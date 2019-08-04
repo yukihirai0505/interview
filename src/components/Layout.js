@@ -13,7 +13,7 @@ const TemplateWrapper = ({ children }) => {
         title={title}
         description={description}
         url="https://pr.yabaiwebyasan.com/"
-        type="business.business"
+        type="website"
         imageUrl={`https://pr.yabaiwebyasan.com/img/stema.png`}
       />
       <Navbar />

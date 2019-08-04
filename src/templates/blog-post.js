@@ -9,8 +9,8 @@ import {
   IndividualDeveloperContent,
 } from '../components/BlogContent'
 import {
-  FacebookShareButton,
-  FacebookIcon,
+  // FacebookShareButton,
+  // FacebookIcon,
   TwitterShareButton,
   TwitterIcon,
 } from 'react-share'
