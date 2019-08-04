@@ -53,7 +53,7 @@ export const BlogPostTemplate = ({
             <p style={{ fontWeight: 700 }}>
               取材協力:{' '}
               {twitterAccountName ? (
-                <a to={`https://twitter.com/${twitterAccountName}`}>
+                <a href={`https://twitter.com/${twitterAccountName}`}>
                   {nickname}さん(@{twitterAccountName})
                 </a>
               ) : (

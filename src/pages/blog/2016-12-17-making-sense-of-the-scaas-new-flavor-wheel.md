@@ -3,7 +3,7 @@ templateKey: blog-post
 selfIntroduction: Yuki Hiraiですっっ！
 title: 私はテストがしたかった
 subTitle: うおー
-captchaImage: /img/hirai_test_captcha.png
+captchaImage: /img/1564894202/1564894204673_binance - Yuki Hirai.png
 templateType: individual-developer
 serviceName: ステマ！
 contents:
@@ -11,14 +11,14 @@ contents:
     answer: 取材されたい欲を解消できる自己承認欲求にまみれたWEBメディア
   - question: なぜそのようなサービスを開発されたのですか？
     answer: 僕自身が取材されたいけどされないから
-    imagePath: /img/hirai_cebu.jpg
+    imagePath: /img/1564894202/1564894218165_2014-12-13 21.22.27 - Yuki Hirai.jpg
     imageDescription: どこにいてもMacbookを手放そうとはしない平井氏
   - question: このサービスのイチオシポイントはどこですか？
     answer: 簡単に取材記事っぽいものがつくれるところ
   - question: 最後に今後の意気込みをお願いします！
     answer: もっと開発頑張ります
 nickname: 平井氏
-iconImage: /img/hirai.jpg
+iconImage: /img/1564894202/1564894208058_UbXfnaK5_400x400 - Yuki Hirai.jpg
 twitterAccountName: plzprme
 date: 2017-01-04T15:04:10.000Z
 ---
