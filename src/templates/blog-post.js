@@ -84,9 +84,9 @@ export const BlogPostTemplate = ({
                   justifyContent: 'center',
                 }}
               >
-                <FacebookShareButton url={url}>
+                {/* <FacebookShareButton url={url}>
                   <FacebookIcon size={32} round />
-                </FacebookShareButton>
+                </FacebookShareButton> */}
                 <TwitterShareButton
                   title={title}
                   via="@plzprme"
