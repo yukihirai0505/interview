@@ -179,6 +179,7 @@ NormalContent.propTypes = {
 
 export const IndividualDeveloperContent = ({
   serviceName,
+  serviceURL,
   selfIntroduction,
   nickname,
   icon,
@@ -189,7 +190,9 @@ export const IndividualDeveloperContent = ({
       intro={
         <p>
           本日はいま話題沸騰中のサービス
-          <b className="text-yellow-line">「{serviceName}」</b>
+          <b className="text-yellow-line">
+            「{<a href={serviceURL}>{serviceName}</a>}」
+          </b>
           を開発した<b>{nickname}</b>
           さんをお呼びしてインタビューしていきたいと思います。
           ということでさっそくこの方に登場願いましょう。
@@ -205,6 +208,7 @@ export const IndividualDeveloperContent = ({
 
 IndividualDeveloperContent.propTypes = {
   serviceName: PropTypes.string,
+  serviceURL: PropTypes.string,
   nickname: PropTypes.string,
   icon: PropTypes.string,
   contents: PropTypes.array,

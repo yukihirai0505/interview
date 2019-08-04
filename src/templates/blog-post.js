@@ -25,6 +25,7 @@ export const BlogPostTemplate = ({
   selfIntroduction,
   templateType,
   serviceName,
+  serviceURL,
   nickname,
   icon,
   twitterAccountName,
@@ -70,6 +71,7 @@ export const BlogPostTemplate = ({
             ) : templateType === 'individual-developer' ? (
               <IndividualDeveloperContent
                 serviceName={serviceName}
+                serviceURL={serviceURL}
                 selfIntroduction={selfIntroduction}
                 nickname={nickname}
                 icon={icon}
@@ -112,6 +114,7 @@ BlogPostTemplate.propTypes = {
   helmet: PropTypes.object,
   templateType: PropTypes.string,
   serviceName: PropTypes.string,
+  serviceURL: PropTypes.string,
   nickname: PropTypes.string,
   icon: PropTypes.string,
   contents: PropTypes.array,
@@ -168,6 +171,7 @@ const BlogPost = ({ data }) => {
         selfIntroduction={post.frontmatter.selfIntroduction}
         templateType={post.frontmatter.templateType}
         serviceName={post.frontmatter.serviceName}
+        serviceURL={post.frontmatter.serviceURL}
         nickname={post.frontmatter.nickname}
         icon={post.frontmatter.iconImage.childImageSharp.fluid.src}
         twitterAccountName={post.frontmatter.twitterAccountName}
@@ -206,6 +210,7 @@ export const pageQuery = graphql`
         }
         templateType
         serviceName
+        serviceURL
         contents {
           question
           answer
