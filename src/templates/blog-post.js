@@ -24,6 +24,7 @@ export const BlogPostTemplate = ({
   subTitle,
   selfIntroduction,
   templateType,
+  isDog,
   serviceName,
   serviceURL,
   nickname,
@@ -65,6 +66,7 @@ export const BlogPostTemplate = ({
               <NormalContent
                 selfIntroduction={selfIntroduction}
                 nickname={nickname}
+                isDog={isDog}
                 icon={icon}
                 contents={contents}
               />
@@ -74,6 +76,7 @@ export const BlogPostTemplate = ({
                 serviceURL={serviceURL}
                 selfIntroduction={selfIntroduction}
                 nickname={nickname}
+                isDog={isDog}
                 icon={icon}
                 contents={contents}
               />
@@ -113,6 +116,7 @@ BlogPostTemplate.propTypes = {
   selfIntroduction: PropTypes.string,
   helmet: PropTypes.object,
   templateType: PropTypes.string,
+  isDog: PropTypes.bool,
   serviceName: PropTypes.string,
   serviceURL: PropTypes.string,
   nickname: PropTypes.string,
@@ -170,6 +174,7 @@ const BlogPost = ({ data }) => {
         subTitle={post.frontmatter.subTitle}
         selfIntroduction={post.frontmatter.selfIntroduction}
         templateType={post.frontmatter.templateType}
+        isDog={post.frontmatter.isDog}
         serviceName={post.frontmatter.serviceName}
         serviceURL={post.frontmatter.serviceURL}
         nickname={post.frontmatter.nickname}
@@ -209,6 +214,7 @@ export const pageQuery = graphql`
           }
         }
         templateType
+        isDog
         serviceName
         serviceURL
         contents {

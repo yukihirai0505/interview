@@ -44,6 +44,7 @@ Comment.propTypes = {
 
 const CommonContent = ({
   intro,
+  isDog = false,
   selfIntroduction,
   nickname,
   icon,
@@ -52,12 +53,22 @@ const CommonContent = ({
   return (
     <div>
       {intro}
-      <Comment
-        comment={`どうも！${nickname}と申します。本日はよろしくお願いいたします！`}
-        nickname={nickname}
-        icon={icon}
-        isNormal={true}
-      />
+      {isDog ? (
+        <Comment
+          comment={`キャンッ！`}
+          nickname={nickname}
+          icon={icon}
+          isNormal={true}
+        />
+      ) : (
+        <Comment
+          comment={`どうも！${nickname}と申します。本日はよろしくお願いいたします！`}
+          nickname={nickname}
+          icon={icon}
+          isNormal={true}
+        />
+      )}
+
       <Comment
         comment={`本日は貴重なお時間ありがとうございます！どうぞよろしくお願いいたします！`}
       />
@@ -72,7 +83,11 @@ const CommonContent = ({
             icon={icon}
             isNormal={true}
           />
-          <Comment comment={`なるほどー！ありがとうございます！`} />
+          <Comment
+            comment={`なるほどー！ありがとうございます！${
+              isDog ? '(ちょっと何言ってるかわからない...)' : ''
+            }`}
+          />
         </div>
       )}
       {contents.map(({ question, answer, imagePath, imageDescription }) => {
@@ -108,12 +123,22 @@ const CommonContent = ({
       <Comment
         comment={`${nickname}さん！本日はお忙しい中取材のお時間ありがとうございました！ぜひ、また取材させてくださいね！`}
       />
-      <Comment
-        comment={`いえ！こちらこそ楽しかったです！ありがとうございました！`}
-        nickname={nickname}
-        icon={icon}
-        isNormal={true}
-      />
+      {isDog ? (
+        <Comment
+          comment={`キャンキャン！`}
+          nickname={nickname}
+          icon={icon}
+          isNormal={true}
+        />
+      ) : (
+        <Comment
+          comment={`いえ！こちらこそ楽しかったです！ありがとうございました！`}
+          nickname={nickname}
+          icon={icon}
+          isNormal={true}
+        />
+      )}
+
       <p style={{ marginTop: '20px' }}>
         {nickname}
         さんのお話はとてもユニークで面白かったですね！
@@ -142,6 +167,7 @@ const CommonContent = ({
 
 CommonContent.propTypes = {
   intro: PropTypes.element,
+  isDog: PropTypes.bool,
   nickname: PropTypes.string,
   icon: PropTypes.string,
   contents: PropTypes.array,
@@ -150,6 +176,7 @@ CommonContent.propTypes = {
 export const NormalContent = ({
   selfIntroduction,
   nickname,
+  isDog,
   icon,
   contents,
 }) => {
@@ -165,6 +192,7 @@ export const NormalContent = ({
       }
       selfIntroduction={selfIntroduction}
       nickname={nickname}
+      isDog={isDog}
       icon={icon}
       contents={contents}
     />
@@ -182,6 +210,7 @@ export const IndividualDeveloperContent = ({
   serviceURL,
   selfIntroduction,
   nickname,
+  isDog,
   icon,
   contents,
 }) => {
@@ -200,6 +229,7 @@ export const IndividualDeveloperContent = ({
       }
       selfIntroduction={selfIntroduction}
       nickname={nickname}
+      isDog={isDog}
       icon={icon}
       contents={contents}
     />
