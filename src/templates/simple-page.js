@@ -4,11 +4,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
-export const PrivacyPolicyPageTemplate = ({
-  title,
-  content,
-  contentComponent,
-}) => {
+export const SimplePageTemplate = ({ title, content, contentComponent }) => {
   const PageContent = contentComponent || Content
 
   return (
@@ -32,18 +28,18 @@ export const PrivacyPolicyPageTemplate = ({
   )
 }
 
-PrivacyPolicyPageTemplate.propTypes = {
+SimplePageTemplate.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
 }
 
-const PrivacyPolicyPage = ({ data }) => {
+const SimplePage = ({ data }) => {
   const { markdownRemark: post } = data
 
   return (
     <Layout>
-      <PrivacyPolicyPageTemplate
+      <SimplePageTemplate
         contentComponent={HTMLContent}
         title={post.frontmatter.title}
         content={post.html}
@@ -52,14 +48,14 @@ const PrivacyPolicyPage = ({ data }) => {
   )
 }
 
-PrivacyPolicyPage.propTypes = {
+SimplePage.propTypes = {
   data: PropTypes.object.isRequired,
 }
 
-export default PrivacyPolicyPage
+export default SimplePage
 
-export const PrivacyPolicyPageQuery = graphql`
-  query PrivacyPolicyPage($id: String!) {
+export const SimplePageQuery = graphql`
+  query SimplePage($id: String!) {
     markdownRemark(id: { eq: $id }) {
       html
       frontmatter {

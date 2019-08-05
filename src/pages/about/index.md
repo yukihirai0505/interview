@@ -1,5 +1,5 @@
 ---
-templateKey: 'about-page'
+templateKey: 'simple-page'
 path: /about
 title: ステマ！について
 ---

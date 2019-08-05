@@ -2,18 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import BlogLayout from '../components/blog/BlogLayout'
 import Img from 'gatsby-image'
 import { OGP } from '../components/OpenGraphProtocol'
-import {
-  NormalContent,
-  IndividualDeveloperContent,
-} from '../components/BlogContent'
-import {
-  // FacebookShareButton,
-  // FacebookIcon,
-  TwitterShareButton,
-  TwitterIcon,
-} from 'react-share'
+import { NormalContent, ServiceContent } from '../components/blog/BlogContent'
 import { globalHistory } from '@reach/router'
 
 export const BlogPostTemplate = ({
@@ -32,80 +24,37 @@ export const BlogPostTemplate = ({
   twitterAccountName,
   contents,
 }) => {
+  const content =
+    templateType === 'normal' ? (
+      <NormalContent
+        selfIntroduction={selfIntroduction}
+        nickname={nickname}
+        isDog={isDog}
+        icon={icon}
+        contents={contents}
+      />
+    ) : templateType === 'individual-developer' ? (
+      <ServiceContent
+        serviceName={serviceName}
+        serviceURL={serviceURL}
+        selfIntroduction={selfIntroduction}
+        nickname={nickname}
+        isDog={isDog}
+        icon={icon}
+        contents={contents}
+      />
+    ) : null
   return (
-    <section className="section">
-      {helmet || ''}
-      <div className="container content">
-        <div className="columns">
-          <div className="column blog-post-content-wrapper">
-            <span className="blog-post-sub-title text-yellow-line">
-              {subTitle}
-            </span>
-            <h1
-              className="title is-size-2 has-text-weight-bold is-bold-light"
-              style={{ marginTop: 12 }}
-            >
-              {title}
-            </h1>
-            <div style={{ marginBottom: '1.2em' }}>
-              <span className="pr-icon">#ステマ！</span>{' '}
-              <span className="pr-icon">#PR</span>
-            </div>
-            <p>{date}</p>
-            <p style={{ fontWeight: 700 }}>
-              取材協力:{' '}
-              {twitterAccountName ? (
-                <a href={`https://twitter.com/${twitterAccountName}`}>
-                  {nickname}さん(@{twitterAccountName})
-                </a>
-              ) : (
-                `${nickname}さん`
-              )}
-            </p>
-            {templateType === 'normal' ? (
-              <NormalContent
-                selfIntroduction={selfIntroduction}
-                nickname={nickname}
-                isDog={isDog}
-                icon={icon}
-                contents={contents}
-              />
-            ) : templateType === 'individual-developer' ? (
-              <IndividualDeveloperContent
-                serviceName={serviceName}
-                serviceURL={serviceURL}
-                selfIntroduction={selfIntroduction}
-                nickname={nickname}
-                isDog={isDog}
-                icon={icon}
-                contents={contents}
-              />
-            ) : null}
-            <div style={{ padding: '36px 20px' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {/* <FacebookShareButton url={url}>
-                  <FacebookIcon size={32} round />
-                </FacebookShareButton> */}
-                <TwitterShareButton
-                  title={title}
-                  via="@plzprme"
-                  url={url}
-                  style={{ marginLeft: '8px' }}
-                >
-                  <TwitterIcon size={32} round />
-                </TwitterShareButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <BlogLayout
+      helmet={helmet}
+      title={title}
+      subTitle={subTitle}
+      nickname={nickname}
+      url={url}
+      date={date}
+      twitterAccountName={twitterAccountName}
+      content={content}
+    />
   )
 }
 
@@ -120,23 +69,31 @@ BlogPostTemplate.propTypes = {
   serviceName: PropTypes.string,
   serviceURL: PropTypes.string,
   nickname: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.object,
   contents: PropTypes.array,
 }
 
-const BlogPostCaptchaImage = ({ imageInfo }) => {
+export const BlogPostCaptchaImage = ({ imageInfo }) => {
   const { alt = '', image } = imageInfo
   return (
     <div>
       <div className="blog-post-background-captcha-image">
-        <Img
-          style={{ 'object-fit': 'cover', hegiht: '356px' }}
-          fluid={image.childImageSharp.fluid}
-          alt={alt}
-        />
+        {image.src ? (
+          <img style={{ width: '100%' }} src={image.src} alt={alt} />
+        ) : (
+          <Img
+            style={{ objectFit: 'cover', hegiht: '356px' }}
+            fluid={image.childImageSharp.fluid}
+            alt={alt}
+          />
+        )}
       </div>
       <div className="blog-post-captcha-image">
-        <Img fluid={image.childImageSharp.fluid} alt={alt} />
+        {image.src ? (
+          <img src={image.src} alt={alt} />
+        ) : (
+          <Img fluid={image.childImageSharp.fluid} alt={alt} />
+        )}
       </div>
     </div>
   )
@@ -178,7 +135,7 @@ const BlogPost = ({ data }) => {
         serviceName={post.frontmatter.serviceName}
         serviceURL={post.frontmatter.serviceURL}
         nickname={post.frontmatter.nickname}
-        icon={post.frontmatter.iconImage.childImageSharp.fluid.src}
+        icon={post.frontmatter.iconImage}
         twitterAccountName={post.frontmatter.twitterAccountName}
         contents={post.frontmatter.contents}
       />
@@ -207,7 +164,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         captchaImage {
           childImageSharp {
-            fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
+            fluid(maxWidth: 560, maxHeight: 294) {
               src
               ...GatsbyImageSharpFluid
             }
@@ -222,7 +179,7 @@ export const pageQuery = graphql`
           answer
           imagePath {
             childImageSharp {
-              fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
+              fluid(maxWidth: 560) {
                 src
                 ...GatsbyImageSharpFluid
               }
@@ -233,9 +190,8 @@ export const pageQuery = graphql`
         nickname
         iconImage {
           childImageSharp {
-            fluid(maxWidth: 50, maxHeight: 50, quality: 100) {
-              src
-              ...GatsbyImageSharpFluid
+            fixed(width: 50, height: 50) {
+              ...GatsbyImageSharpFixed
             }
           }
         }

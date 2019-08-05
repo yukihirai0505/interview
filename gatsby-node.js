@@ -3,6 +3,24 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 
+require('source-map-support').install()
+
+require('tsconfig-paths').register({
+  baseUrl: './',
+  paths: {
+    '@src/*': ['src/*'],
+  },
+})
+
+require('ts-node').register({
+  compilerOptions: {
+    module: 'commonjs',
+    target: 'es2017',
+    noImplicitAny: false,
+    types: ['node'],
+  },
+})
+
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
@@ -46,6 +64,15 @@ exports.createPages = ({ actions, graphql }) => {
   })
 }
 
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+  console.log(page.path)
+  if (page.path.match(/^\/fiction\/fiction\//)) {
+    page.matchPath = '/fiction/:fictionId'
+    createPage(page)
+  }
+}
+
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   fmImagesToRelative(node) // convert image paths for gatsby images
@@ -58,4 +85,16 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
   }
+}
+
+const { resolve } = require('path')
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '@src': resolve(__dirname, 'src/'),
+      },
+    },
+  })
 }

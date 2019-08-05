@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import logo from '../img/logo.png'
+import TwitterAuthButton from './auth/TwitterAuthButton'
+import SignOutButton from './auth/SignOutButton'
 
 const Navbar = class extends React.Component {
   constructor(props) {
@@ -12,14 +14,11 @@ const Navbar = class extends React.Component {
   }
 
   toggleHamburger = () => {
-    // toggle the active boolean in the state
     this.setState(
       {
         active: !this.state.active,
       },
-      // after state has been updated,
       () => {
-        // set the class in state for the navbar accordingly
         this.state.active
           ? this.setState({
               navBarActiveClass: 'is-active',
@@ -32,6 +31,7 @@ const Navbar = class extends React.Component {
   }
 
   render() {
+    const user = this.props.user
     return (
       <nav
         className="navbar is-transparent"
@@ -63,15 +63,14 @@ const Navbar = class extends React.Component {
                 取材一覧
               </Link>
             </div>
-            <div className="navbar-end has-text-centered">
-              <a
-                className="navbar-item"
-                href="https://forms.gle/twhjDuw32mEJZwz77"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                取材されたい！
-              </a>
+            <div className="navbar-item navbar-end has-text-centered">
+              {user ? (
+                <span>
+                  <SignOutButton />
+                </span>
+              ) : (
+                <TwitterAuthButton />
+              )}
             </div>
           </div>
         </div>

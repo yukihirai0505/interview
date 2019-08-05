@@ -1,52 +1,57 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Link, graphql } from 'gatsby'
-
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import PickUpBlogPost from '../components/PickUpBlogPost'
-import BlogRoll from '../components/BlogRoll'
+import { useFirebaseUser } from '@src/hooks/useFirebaseUser'
+import IndexPageTemplate from '@src/components/pages/IndexPageTemplate'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/storage'
+import { navigate } from 'gatsby-link'
 
-export const IndexPageTemplate = ({ posts }) => {
-  const post = posts[0]
-  return (
-    <div>
-      <PickUpBlogPost post={post} />
-      <section className="section">
-        <div className="post-container">
-          <div>
-            <h3 className="post-page-title">新着取材</h3>
-          </div>
-          <BlogRoll posts={posts.slice(1)} />
-          <div className="has-text-centered">
-            <div className="read-more">
-              <Link to="/blog">他の取材もみる</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
+const templates = [{ title: '青汁王子風' }]
+
+const createFiction = async templateType => {
+  navigate(`/preview?templateKey=${templateType}`)
 }
 
-IndexPageTemplate.propTypes = {
-  posts: PropTypes.array,
+export const IndexSignInPageTemplate = () => {
+  return (
+    <section className="section">
+      <div className="post-container">
+        <div>
+          <h4 className="post-page-title">自動で取材風記事をつくる</h4>
+        </div>
+        <div>
+          <ul className="fiction-title-list">
+            {templates.map((template, key) => {
+              return (
+                <li key={key}>
+                  <a onClick={() => createFiction(key)}>{template.title}</a>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        <div>
+          <h4 className="post-page-title" style={{ marginTop: '20px' }}>
+            真面目に取材記事をつくる
+          </h4>
+        </div>
+        <a href={'https://forms.gle/twhjDuw32mEJZwz77'}>→【Googleフォーム】</a>
+      </div>
+    </section>
+  )
 }
 
 const IndexPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark
+  const user = useFirebaseUser()
+  console.log(user)
   return (
-    <Layout>
-      <IndexPageTemplate posts={edges} />
+    <Layout user={user}>
+      {user ? <IndexSignInPageTemplate /> : <IndexPageTemplate posts={edges} />}
     </Layout>
   )
-}
-
-IndexPage.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.object,
-    }),
-  }),
 }
 
 export default IndexPage
@@ -60,8 +65,6 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
-          excerpt(pruneLength: 400)
-          id
           fields {
             slug
           }
@@ -72,7 +75,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             captchaImage {
               childImageSharp {
-                fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
+                fluid(maxWidth: 560, maxHeight: 294) {
                   src
                   ...GatsbyImageSharpFluid
                 }
