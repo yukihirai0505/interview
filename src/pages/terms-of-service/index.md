@@ -1,5 +1,5 @@
 ---
-templateKey: 'terms-of-service-page'
+templateKey: 'simple-page'
 path: /terms-of-service
 title: 利用規約
 ---

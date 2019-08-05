@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Layout from '../../components/Layout'
-import BlogRoll from '../../components/BlogRoll'
+import BlogRoll from '../../components/blog/BlogRoll'
+import { graphql } from 'gatsby'
+import { useFirebaseUser } from '@src/hooks/useFirebaseUser'
 
 export const BlogIndexPageTemplate = ({ posts }) => {
+  const user = useFirebaseUser()
   return (
-    <Layout>
+    <Layout user={user}>
       <section className="section">
         <div className="post-container">
           <div>
