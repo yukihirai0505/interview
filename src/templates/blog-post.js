@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-// import Img from 'gatsby-image'
+import Img from 'gatsby-image'
 import { OGP } from '../components/OpenGraphProtocol'
 import {
   NormalContent,
@@ -129,20 +129,14 @@ const BlogPostCaptchaImage = ({ imageInfo }) => {
   return (
     <div>
       <div className="blog-post-background-captcha-image">
-        {/* <Img
+        <Img
           style={{ 'object-fit': 'cover', hegiht: '356px' }}
           fluid={image.childImageSharp.fluid}
-          alt={alt}
-        /> */}
-        <img
-          style={{ 'object-fit': 'cover', hegiht: '356px' }}
-          src={image.childImageSharp.fluid.src}
           alt={alt}
         />
       </div>
       <div className="blog-post-captcha-image">
-        {/* <Img fluid={image.childImageSharp.fluid} alt={alt} /> */}
-        <img src={image.childImageSharp.fluid.src} alt={alt} />
+        <Img fluid={image.childImageSharp.fluid} alt={alt} />
       </div>
     </div>
   )
@@ -213,7 +207,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         captchaImage {
           childImageSharp {
-            fluid(quality: 100) {
+            fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
               src
               ...GatsbyImageSharpFluid
             }
@@ -228,7 +222,7 @@ export const pageQuery = graphql`
           answer
           imagePath {
             childImageSharp {
-              fluid(quality: 100) {
+              fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
                 src
                 ...GatsbyImageSharpFluid
               }
@@ -239,7 +233,7 @@ export const pageQuery = graphql`
         nickname
         iconImage {
           childImageSharp {
-            fluid(quality: 100) {
+            fluid(maxWidth: 50, maxHeight: 50, quality: 100) {
               src
               ...GatsbyImageSharpFluid
             }
