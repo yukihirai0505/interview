@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Img from 'gatsby-image'
+// import Img from 'gatsby-image'
 import { Fragment } from 'react'
 
 const Comment = ({
@@ -104,8 +104,12 @@ const CommonContent = ({
               <div className="image-item">
                 <figure>
                   <div className="image">
-                    <Img
+                    {/* <Img
                       fluid={imagePath.childImageSharp.fluid}
+                      alt={imageDescription}
+                    /> */}
+                    <img
+                      src={imagePath.childImageSharp.fluid.src}
                       alt={imageDescription}
                     />
                   </div>

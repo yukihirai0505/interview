@@ -57,7 +57,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             captchaImage {
               childImageSharp {
-                fluid(maxWidth: 560, maxHeight: 294, quality: 100) {
+                fluid(quality: 100) {
                   src
                   ...GatsbyImageSharpFluid
                 }
