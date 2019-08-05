@@ -148,7 +148,7 @@ const BlogPost = ({ data }) => {
   const articleUrl = `https://pr.yabaiwebyasan.com${globalHistory.location.pathname}`
 
   return (
-    <Layout>
+    <Layout isWebsite={false}>
       <div className="featured-thumbnail">
         {post.frontmatter.captchaImage ? (
           <BlogPostCaptchaImage

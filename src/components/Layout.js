@@ -5,17 +5,19 @@ import './all.sass'
 import useSiteMetadata from './SiteMetadata'
 import { OGP } from './OpenGraphProtocol'
 
-const TemplateWrapper = ({ children }) => {
+const TemplateWrapper = ({ children, isWebsite = true }) => {
   const { title, description } = useSiteMetadata()
   return (
     <div>
-      <OGP
-        title={title}
-        description={description}
-        url="https://pr.yabaiwebyasan.com/"
-        type="website"
-        imageUrl={`https://pr.yabaiwebyasan.com/img/stema.png`}
-      />
+      {isWebsite ? (
+        <OGP
+          title={title}
+          description={description}
+          url="https://pr.yabaiwebyasan.com/"
+          type="website"
+          imageUrl={`https://pr.yabaiwebyasan.com/img/stema.png`}
+        />
+      ) : null}
       <Navbar />
       <div>{children}</div>
       <Footer />
