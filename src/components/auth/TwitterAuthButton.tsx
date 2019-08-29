@@ -6,12 +6,11 @@ import { navigate } from 'gatsby'
 export default () => {
   const onClickHandler = () => {
     const user = firebase.auth().currentUser
-    if (user) {
-      navigate('/')
-    } else {
+    if (!user) {
       const provider = new firebase.auth.TwitterAuthProvider()
       firebase.auth().signInWithPopup(provider)
     }
+    navigate('/')
   }
   return (
     <button className="button is-primary" onClick={onClickHandler}>
