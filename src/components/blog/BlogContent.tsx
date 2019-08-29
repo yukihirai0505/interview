@@ -4,11 +4,11 @@ import { navigate } from 'gatsby'
 import { CoverImageOriginal, UserContent } from '@src/types'
 import CommentItem from './CommentItem'
 import addLastMessage from './LastMessage'
-import Intro from './Intro'
 import { Fragment } from 'react'
 import firebase from 'firebase/app'
 import { addInterview } from '@src/actions/InterviewAction'
 import TwitterAuthButton from '../auth/TwitterAuthButton'
+import Intro from './Intro'
 
 interface BaseBlogContent {
   isDog: boolean

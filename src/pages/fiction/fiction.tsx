@@ -1,17 +1,18 @@
 import * as React from 'react'
 import Layout from '../../components/Layout'
-import { useFirestoreInterview } from '@src/hooks/useFirestoreInterviews'
+// import { useFirestoreInterview } from '@src/hooks/useFirestoreInterviews'
 import BlogLayout from '@src/components/blog/BlogLayout'
 import { CommonBlogContent } from '@src/components/blog/BlogContent'
 import { useFirebaseUser } from '@src/hooks/useFirebaseUser'
 import { BlogPostCaptchaImage } from '@src/templates/blog-post'
 import { OGP } from '@src/components/OpenGraphProtocol'
 import { globalHistory } from '@reach/router'
+import { userFirestoreInterview } from '@src/hooks/useFirestoreInterview'
 
 export default () => {
   const user = useFirebaseUser()
-  const fictionId = globalHistory.location.pathname.replace('/fiction/', '')
-  const interview = useFirestoreInterview(fictionId)
+  // const fictionId = globalHistory.location.pathname.replace('/fiction/', '')
+  const interview = userFirestoreInterview()
   if (!interview) {
     return <p>ローディング中</p>
   }
