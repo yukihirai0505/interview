@@ -8,7 +8,7 @@ import 'firebase/auth'
 import 'firebase/storage'
 import { navigate } from 'gatsby-link'
 
-const templates = [{ title: '青汁王子風' }]
+const templates = [{ title: '青汁王子風' }, {title: 'イチロー風'}]
 
 const createFiction = async templateType => {
   navigate(`/preview?templateKey=${templateType}`)

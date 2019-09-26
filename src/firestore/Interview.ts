@@ -20,6 +20,7 @@ export const toModel = (id: string, data: firebase.firestore.DocumentData) => {
     id,
     nickname: data.nickname,
     contents: data.contents,
+    templateKey: data.templateKey,
     profileImageUrl: data.profileImageUrl,
     createdAt,
     updatedAt,

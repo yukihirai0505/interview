@@ -47,6 +47,7 @@ export interface Interview {
   readonly id: string
   readonly nickname: string
   readonly profileImageUrl: string
+  readonly templateKey: number
   readonly contents: UserContent[]
   readonly createdAt?: number
   readonly updatedAt?: number

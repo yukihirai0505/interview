@@ -1,28 +1,10 @@
 import { useState, useEffect } from 'react'
 import firebase from 'firebase/app'
 import {
-  interviewCollection,
   userInterviewCollection,
   toModel,
 } from '@src/firestore/Interview'
 import { Interview, VisibilityFilter } from '@src/types'
-
-export const useFirestoreInterview = (interviewId: string) => {
-  const [interview, setInterview] = useState<Interview>()
-  useEffect(() => {
-    const unsubscribe = interviewCollection()
-      .doc(interviewId)
-      .onSnapshot(snapshot => {
-        const interview = toModel(snapshot.id, snapshot.data()!)
-        setInterview(interview)
-      })
-    return () => {
-      console.info(`firestore: unsubscribe onSnapshot:interview`)
-      unsubscribe()
-    }
-  }, [interviewId])
-  return interview
-}
 
 export const useFirestoreInterviews = (
   uid: string,

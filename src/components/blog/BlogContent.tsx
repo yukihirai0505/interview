@@ -21,6 +21,7 @@ interface BaseBlogContent {
 
 interface CommonBlogContent extends BaseBlogContent {
   intro?: JSX.Element
+  templateKey?: number
 }
 
 interface ServiceContent extends BaseBlogContent {
@@ -34,41 +35,27 @@ const savePhoto = async (user: firebase.User) => {
   var blob = await response.blob()
   var userId = user!.uid
   var picRef = firebase.storage().ref(userId + '/profilePhoto')
-  var snapshot = await picRef.put(blob)
+  await picRef.put(blob)
   var uploaded = await picRef.getDownloadURL()
   return uploaded
 }
 
-const saveContent = async () => {
-  var user = firebase.auth().currentUser
+const saveContent = async (templateKey: number) => {
+  const user = firebase.auth().currentUser
   if (user) {
     const uploadedImage = await savePhoto(user)
-    const comments = Array.from(
-      document && document.getElementsByClassName('comment-text')
+    const contents: UserContent[] = Array.from(
+      document && document.getElementsByClassName('comment')
     ).map(comment => {
-      return comment.textContent
+      const isAnswer = comment.className.includes('normal')
+      const commentText = comment.querySelector('.comment-text')!.textContent
+      return isAnswer? {answer: commentText}: {question: commentText}
     })
-    let rest: UserContent[] = []
-    for (let i = 0; i < comments.length - 3; i = i + 2) {
-      const index = 2 + i
-      rest.push({ question: comments[index]!, answer: comments[index + 1]! })
-    }
-    const contents: UserContent[] = [
-      {
-        answer: comments[0]!,
-      },
-      {
-        question: comments[1]!,
-      },
-      ...rest,
-      {
-        question: comments.slice(-1)[0]!,
-      },
-    ]
     const inteviewId = await addInterview(
       user.uid,
-      `${user.displayName}汁王子`,
+      `${user.displayName}`,
       uploadedImage,
+      templateKey,
       contents
     )
     navigate(`/fiction/${inteviewId}`)
@@ -81,6 +68,7 @@ export const CommonBlogContent = ({
   icon,
   contents,
   editable = false,
+  templateKey = 0,
 }: CommonBlogContent) => {
   return (
     <div>
@@ -134,7 +122,7 @@ export const CommonBlogContent = ({
       )}
       {editable ? (
         <div className="has-text-centered">
-          <button className="button is-primary" onClick={saveContent}>
+          <button className="button is-primary" onClick={() => saveContent(templateKey)}>
             保存する
           </button>
         </div>
