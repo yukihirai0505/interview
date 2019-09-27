@@ -42,7 +42,7 @@
   "scripts": {
     "clean": "npx gatsby clean",
     "start": "npm run develop",
-    "build": "npm run clean && npx gatsby build",
+    "build": "npm run clean && npx gatsby build && cp _redirects public/",
     "develop": "npm run clean && npx gatsby develop",
     "serve": "npx gatsby serve",
     "firestore-deploy": "firebase deploy --only firestore:rules --project plz-pr-me",
