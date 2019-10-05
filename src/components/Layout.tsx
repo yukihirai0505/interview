@@ -22,7 +22,7 @@ export default ({
         <OGP
           title={title}
           description={description}
-          url="https://pr.yabaiwebyasan.com/"
+          url="https://pr.yabaiwebyasan.com"
           type="website"
           imageUrl={`https://pr.yabaiwebyasan.com/img/stema.png`}
         />

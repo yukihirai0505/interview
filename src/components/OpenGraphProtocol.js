@@ -40,6 +40,10 @@ export const OGP = ({ title, description, url, type, imageUrl }) => (
     <meta property="fb:app_id" content="402547887043929" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@plzprme" />
+    <meta
+      name="google-site-verification"
+      content="lylvrBhCOQSkXI3oY9l3Gja-3NleTcUy1h9Obi_lqPI"
+    />
   </Helmet>
 )
 
