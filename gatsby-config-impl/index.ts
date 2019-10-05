@@ -84,6 +84,7 @@ export const plugins: GatsbyPlugin[] = [
     resolve: `gatsby-plugin-google-analytics`,
     options: {
       trackingId: 'UA-145112640-1',
+      head: true,
     },
   },
   `gatsby-plugin-typescript`,
