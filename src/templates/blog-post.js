@@ -46,7 +46,7 @@ export const BlogPostTemplate = ({
           <p>
             本日はいま話題沸騰中のサービス
             <b className="text-yellow-line">
-              「{<a href={serviceURL}>{serviceName}</a>}」
+              「{<a href={serviceURL} style={{color: '#3273dc'}}>{serviceName}</a>}」
             </b>
             を開発した<b>{nickname}</b>
             さんをお呼びしてインタビューしていきたいと思います。
