@@ -2,7 +2,7 @@ import * as React from 'react'
 import Layout from '../../components/Layout'
 // import { useFirestoreInterview } from '@src/hooks/useFirestoreInterviews'
 import BlogLayout from '@src/components/blog/BlogLayout'
-import { CommonBlogContent } from '@src/components/blog/BlogContent'
+import { BlogContent } from '@src/components/blog/BlogContent'
 import { useFirebaseUser } from '@src/hooks/useFirebaseUser'
 import { BlogPostCaptchaImage } from '@src/templates/blog-post'
 import { OGP } from '@src/components/OpenGraphProtocol'
@@ -20,10 +20,9 @@ export default () => {
   console.info(interview.contents)
   const template = getContentByTemplateKey(interview.nickname, Number(interview.templateKey))
   const content = (
-    <CommonBlogContent
+    <BlogContent
       intro={template.intro}
       nickname={template.nickname}
-      isDog={false}
       icon={{ src: interview.profileImageUrl }}
       contents={interview.contents}
     />

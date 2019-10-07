@@ -5,7 +5,9 @@ import Layout from '../components/Layout'
 import BlogLayout from '../components/blog/BlogLayout'
 import Img from 'gatsby-image'
 import { OGP } from '../components/OpenGraphProtocol'
-import { NormalContent, ServiceContent } from '../components/blog/BlogContent'
+import {
+  BlogContent,
+} from '../components/blog/BlogContent'
 import { globalHistory } from '@reach/router'
 
 export const BlogPostTemplate = ({
@@ -14,9 +16,7 @@ export const BlogPostTemplate = ({
   url,
   title,
   subTitle,
-  selfIntroduction,
   templateType,
-  isDog,
   serviceName,
   serviceURL,
   nickname,
@@ -26,20 +26,34 @@ export const BlogPostTemplate = ({
 }) => {
   const content =
     templateType === 'normal' ? (
-      <NormalContent
-        selfIntroduction={selfIntroduction}
+      <BlogContent
+        intro={
+          <p>
+            本日はいま
+            <b className="text-yellow-line">日本中が熱狂して止まない</b>
+            このお方！<b>{nickname}</b>
+            さんをお呼びしてインタビューしていきたいと思います。
+            ということでさっそくこの方に登場願いましょう。
+          </p>
+        }
         nickname={nickname}
-        isDog={isDog}
         icon={icon}
         contents={contents}
       />
     ) : templateType === 'individual-developer' ? (
-      <ServiceContent
-        serviceName={serviceName}
-        serviceURL={serviceURL}
-        selfIntroduction={selfIntroduction}
+      <BlogContent
+        intro={
+          <p>
+            本日はいま話題沸騰中のサービス
+            <b className="text-yellow-line">
+              「{<a href={serviceURL}>{serviceName}</a>}」
+            </b>
+            を開発した<b>{nickname}</b>
+            さんをお呼びしてインタビューしていきたいと思います。
+            ということでさっそくこの方に登場願いましょう。
+          </p>
+        }
         nickname={nickname}
-        isDog={isDog}
         icon={icon}
         contents={contents}
       />
@@ -62,10 +76,8 @@ BlogPostTemplate.propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
   subTitle: PropTypes.string,
-  selfIntroduction: PropTypes.string,
   helmet: PropTypes.object,
   templateType: PropTypes.string,
-  isDog: PropTypes.bool,
   serviceName: PropTypes.string,
   serviceURL: PropTypes.string,
   nickname: PropTypes.string,
@@ -129,9 +141,7 @@ const BlogPost = ({ data }) => {
         url={articleTitle}
         title={articleTitle}
         subTitle={post.frontmatter.subTitle}
-        selfIntroduction={post.frontmatter.selfIntroduction}
         templateType={post.frontmatter.templateType}
-        isDog={post.frontmatter.isDog}
         serviceName={post.frontmatter.serviceName}
         serviceURL={post.frontmatter.serviceURL}
         nickname={post.frontmatter.nickname}
@@ -159,7 +169,6 @@ export const pageQuery = graphql`
       frontmatter {
         title
         subTitle
-        selfIntroduction
         templateKey
         date(formatString: "MMMM DD, YYYY")
         captchaImage {
@@ -171,7 +180,6 @@ export const pageQuery = graphql`
           }
         }
         templateType
-        isDog
         serviceName
         serviceURL
         contents {

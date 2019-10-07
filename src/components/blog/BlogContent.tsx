@@ -3,40 +3,28 @@ import Img from 'gatsby-image'
 import { navigate } from 'gatsby'
 import { CoverImageOriginal, UserContent } from '@src/types'
 import CommentItem from './CommentItem'
-import addLastMessage from './LastMessage'
 import { Fragment } from 'react'
 import firebase from 'firebase/app'
 import { addInterview } from '@src/actions/InterviewAction'
 import TwitterAuthButton from '../auth/TwitterAuthButton'
-import Intro from './Intro'
 
-interface BaseBlogContent {
-  isDog: boolean
-  selfIntroduction?: string
+interface BlogContent {
+  intro?: JSX.Element
+  templateKey?: number
   nickname: string
   icon: CoverImageOriginal
   contents: UserContent[]
   editable?: boolean
 }
 
-interface CommonBlogContent extends BaseBlogContent {
-  intro?: JSX.Element
-  templateKey?: number
-}
-
-interface ServiceContent extends BaseBlogContent {
-  serviceName: string
-  serviceURL: string
-}
-
 const savePhoto = async (user: firebase.User) => {
-  var url = user!.providerData[0]!.photoURL!.replace('_normal', '')
-  var response = await fetch(url)
-  var blob = await response.blob()
-  var userId = user!.uid
-  var picRef = firebase.storage().ref(userId + '/profilePhoto')
+  const url = user!.providerData[0]!.photoURL!.replace('_normal', '')
+  const response = await fetch(url)
+  const blob = await response.blob()
+  const userId = user!.uid
+  const picRef = firebase.storage().ref(userId + '/profilePhoto')
   await picRef.put(blob)
-  var uploaded = await picRef.getDownloadURL()
+  const uploaded = await picRef.getDownloadURL()
   return uploaded
 }
 
@@ -49,7 +37,7 @@ const saveContent = async (templateKey: number) => {
     ).map(comment => {
       const isAnswer = comment.className.includes('normal')
       const commentText = comment.querySelector('.comment-text')!.textContent
-      return isAnswer? {answer: commentText}: {question: commentText}
+      return isAnswer ? { answer: commentText } : { question: commentText }
     })
     const inteviewId = await addInterview(
       user.uid,
@@ -62,14 +50,14 @@ const saveContent = async (templateKey: number) => {
   }
 }
 
-export const CommonBlogContent = ({
+export const BlogContent = ({
   intro,
   nickname,
   icon,
   contents,
   editable = false,
   templateKey = 0,
-}: CommonBlogContent) => {
+}: BlogContent) => {
   return (
     <div>
       {intro}
@@ -122,7 +110,10 @@ export const CommonBlogContent = ({
       )}
       {editable ? (
         <div className="has-text-centered">
-          <button className="button is-primary" onClick={() => saveContent(templateKey)}>
+          <button
+            className="button is-primary"
+            onClick={() => saveContent(templateKey)}
+          >
             保存する
           </button>
         </div>
@@ -151,80 +142,5 @@ export const CommonBlogContent = ({
         </p>
       )}
     </div>
-  )
-}
-
-export const NormalContent = ({
-  selfIntroduction,
-  nickname,
-  isDog,
-  icon,
-  contents,
-  editable = false,
-}: CommonBlogContent) => {
-  return (
-    <CommonBlogContent
-      intro={
-        <Intro
-          intro={
-            <p>
-              本日はいま
-              <b className="text-yellow-line">日本中が熱狂して止まない</b>
-              このお方！<b>{nickname}</b>
-              さんをお呼びしてインタビューしていきたいと思います。
-              ということでさっそくこの方に登場願いましょう。
-            </p>
-          }
-          nickname={nickname}
-          icon={icon}
-          selfIntroduction={selfIntroduction}
-          isDog={isDog}
-        />
-      }
-      nickname={nickname}
-      icon={icon}
-      contents={addLastMessage({ contents, nickname, isDog })}
-      editable={editable}
-      isDog={isDog}
-    />
-  )
-}
-
-export const ServiceContent = ({
-  serviceName,
-  serviceURL,
-  selfIntroduction,
-  nickname,
-  isDog,
-  icon,
-  contents,
-}: ServiceContent) => {
-  return (
-    <CommonBlogContent
-      intro={
-        <Intro
-          intro={
-            <p>
-              本日はいま話題沸騰中のサービス
-              <b className="text-yellow-line">
-                「{<a href={serviceURL}>{serviceName}</a>}」
-              </b>
-              を開発した<b>{nickname}</b>
-              さんをお呼びしてインタビューしていきたいと思います。
-              ということでさっそくこの方に登場願いましょう。
-            </p>
-          }
-          nickname={nickname}
-          icon={icon}
-          selfIntroduction={selfIntroduction}
-          isDog={isDog}
-        />
-      }
-      selfIntroduction={selfIntroduction}
-      nickname={nickname}
-      isDog={isDog}
-      icon={icon}
-      contents={addLastMessage({ contents, nickname, isDog })}
-    />
   )
 }

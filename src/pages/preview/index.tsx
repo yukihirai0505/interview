@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import BlogLayout from '@src/components/blog/BlogLayout'
-import { CommonBlogContent } from '@src/components/blog/BlogContent'
+import { BlogContent } from '@src/components/blog/BlogContent'
 import { useFirebaseUser } from '@src/hooks/useFirebaseUser'
 import { BlogPostCaptchaImage } from '@src/templates/blog-post'
 import { getContentByTemplateKey } from '@src/components/templates'
@@ -14,12 +14,10 @@ export default () => {
     const templateKey = new URL(location.href).searchParams.get('templateKey')
     const _nickname = `${userInfo.displayName}`
     const template = getContentByTemplateKey(_nickname, Number(templateKey))
-    console.info(templateKey)
     const content = (
-      <CommonBlogContent
+      <BlogContent
         intro={template.intro}
         nickname={template.nickname}
-        isDog={false}
         icon={{ src: profileUrl }}
         contents={template.contents}
         editable={true}
