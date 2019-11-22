@@ -8,7 +8,7 @@ import 'firebase/auth'
 import 'firebase/storage'
 import { navigate } from 'gatsby-link'
 
-const templates = [{ title: '青汁王子風' }, {title: 'イチロー風'}]
+const templates = [{ title: '青汁王子風' }, { title: 'イチロー風' }]
 
 const createFiction = async templateType => {
   navigate(`/preview?templateKey=${templateType}`)
@@ -37,7 +37,7 @@ export const IndexSignInPageTemplate = () => {
             真面目に取材記事をつくる
           </h4>
         </div>
-        <a href={'https://forms.gle/twhjDuw32mEJZwz77'}>→【Googleフォーム】</a>
+        <a href={'https://forms.gle/twhjDuw32mEJZwz77'}>カスタム投稿</a>
       </div>
     </section>
   )
